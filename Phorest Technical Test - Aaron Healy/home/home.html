@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../bootstrap/css/bootstrapLux.min.css"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrapLux.css"/>
+        <link rel="stylesheet" href="../bootstrap/css/style.css"/>
+        
+        <title> Phorest Test </title>
+     
+    </head>
+    <body>
+	
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Phorest API</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarColor02">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="#" style="color:black;">Home <span class="sr-only">(current)</span></a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#search" style="color:black;">Search Clients</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#searchResults" style="color:black;"> Search Results</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#voucher" style="color:black;">Create Voucher</a>
+			  </li>
+			</ul>
+		  </div>
+		</nav>
+		
+		<!-- jumbotron -->
+		<div class="jumbotron" style="background-image: url(../images/trees.jpg); background-attachment: fixed; background-size: cover; height: 550px; width: 100%; margin-top: 0px; margin-bottom: 0px;">
+			<div class="container" style="margin-top: 50px;">
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<img src="../images/phorest1.png" style="height: 150px; width: 150px; margin-top: 100px; float: right;" alt="logo image" />
+					</div>
+					<div class="col-md-6">
+						<h1 style="color: aliceblue; margin-top: 150px;" class="text-center">Phorest Graduate Test</h1>
+						<br />
+						<h4 style="color: aliceblue;" class="text-center">Aaron Healy</h4>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<!-- client search div-->
+		<div class="container" id="search">
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<h2 class="text-center">Search For A Client</h2>
+					<br/>
+					<p class="text-center">Enter the clients email address or phone number</p>
+					<br/>
+					<form id="form1">
+						<p style="color:black;">Client Email/Phone :</p> <input type="text" id="userInput" value="0.401140628756@example.com" class="form-control"> <br>
+					</form> 
+					<br/>
+					<button class="btn btn-primary" style="width:150px;" onclick="document.getElementById('clientTable').innerHTML = '';getClientData()" value="Submit">Get Client</button>
+	
+					<br/>
+					<br/>
+					
+				</div>
+				<div class="col=md-3"></div>
+			</div>
+		</div>
+		
+		<br/>
+		<br/>
+		<hr style="margin-left:10%; margin-right:10%;"/>
+		<br/>
+		<br/>
+		
+		<!-- search results table-->
+		<div class="container" id="searchResults"> 
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<h2 class="text-center">Search Results</h2>
+					<br/>
+					<p class="text-center">Double click on a client to pass client ID to the create voucher section!</p>
+					<br/>
+					<br/>
+					<table class="table table-hover" id="clientList" onclick="getRow()">
+						<thead>
+							<tr>
+								<th scope="col">Client ID</th>
+								<th scope="col">Client Name</th>
+								<th scope="col">Client Email</th>
+							</tr>
+						</thead>
+						<tbody id="clientTable">
+						</tbody>
+					</table>	
+					<br/>
+					<h4 id="errorMessage" style="color:red;"></h4>
+				</div>
+			</div>
+		</div>
+		
+        <br/>
+        <br/>
+		
+		<!-- Create voucher table-->
+		<div style="background-color:#F8F8F8; width:100%; height:auto;">
+			<div class="container" style="padding-top:100px;" id="voucher">
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<h2 class="text-center">Create a New Voucher</h2>
+						<br/>
+						<p class="text-center">Enter the voucher amount, everything else is taken care of!</p>
+						<br/>
+						<form id="form2">
+							<p style="color:black;">Client ID :</p> <input type="text" id="newCientID" placeholder="Client ID" class="form-control"> <br>
+							<p style="color:black;">Voucher ID :</p> <input type="text" id="voucherId" placeholder="Voucher ID"class="form-control"> <br>
+							<p style="color:black;">Voucher Amount :</p> <input type="text" id="voucherAmount" placeholder="Enter Voucher Amount" class="form-control"> <br>
+						</form> 
+						<br/>
+						<button class="btn btn-primary" onclick="post()" form="form2" type="button">Create Voucher</button>
+						
+						<br/>
+						<br/>
+						
+						<p id="postError" style="color:red;"></p>
+						<p id="postSuccess" style="color:green;"></p>
+						
+						<br/>
+						<br/>
+						<br/>
+					</div>
+				</div>
+			 </div>
+		</div>  
+		
+		<!-- footer-->
+		<footer>
+			<div class="row">
+
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <br />
+                    <p class="text-center" style="color:black;">@Copyright. All rights reserved.</p>
+					<br />
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+		</footer>  
+		
+		<script>
+		  
+			//create auth object
+			const credentials = {
+				username: "global/cloud@apiexamples.com", 
+				password: "VMlRo/eh+Xd8M~l"
+			};
+			
+			//encode auth credentials to base64 function
+			function make_base_auth(user, password) {
+			  var tok = user + ':' + password;
+			  var hash = window.btoa(tok);
+			  return "Basic " + hash;
+			}
+			
+			//returns encoded credentials for header authentication
+			function authentication(credentials) {
+				return make_base_auth(credentials.username, credentials.password);
+			}
+			
+			//GET request method using XMLHttpRequest
+			function getRequest(url, callback) {
+				const req = new XMLHttpRequest();
+				req.open("GET", url, true);
+				req.setRequestHeader("Authorization", authentication(credentials));
+				req.send();
+				//if success parse the JSON
+				req.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					   callback.apply(this,[JSON.parse(this.responseText)]);
+					}
+					//else{
+					//	callback.apply(this, ["API-Error Occurred"]);
+					//}
+				};
+			}
+			
+			//Function to make GET request for the submitted email value.
+			//Parses response data for client if it exists, and updates the UI to contain the client information.
+			function getClientData(){
+				//get email or phone from input
+				let input = document.getElementById("userInput").value;
+				//base url
+				let baseUrl = "http://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client";
+				
+				//if input is email or phone chnage the url
+				if(input.includes("@")){
+					baseUrl = baseUrl + "?email=" + input;
+					console.log(baseUrl);
+				}else{
+					baseUrl = baseUrl + "?phone=" + input;
+				}
+				
+				var table = document.getElementById("passwordtable ");
+				
+				
+				var handleRep = function(respData) {
+					console.log(respData);
+					//if not empty
+					if(respData._embedded) {
+						//if data got, clients = data else clients is null,
+						const clients = (respData._embedded.clients) ? respData._embedded.clients : null;
+						//if clients is not null/undefined
+						if(clients !== undefined || clients !== null){
+							//for each client in clients get the client id, name and email and add them to the table
+							clients.forEach(client => {
+								let id = client["clientId"];
+								let firstname = client["firstName"];
+								let email = client["email"];
+								
+								//tested with extra rows being added when mutliple clients found
+								$("#clientTable").append("<tr><td>" + id + "</td><td style='max-width:250px; word-wrap: break-word;'>" + firstname + "</td><td>" + email + "</td></tr>");
+								
+							});
+						}
+					}
+					//handle errors if clients is null/undefined
+					else{
+							document.getElementById("errorMessage").innerHTML = "API-NO DATA FOUND";
+					}
+				}
+				
+				//pass to getRequest method
+				getRequest(baseUrl, handleRep);
+				
+			}
+			
+			//function to allow user to click on table to data to create voucher fields
+			function getRow() {
+            //checks that the table isnt empty
+                if (document.getElementById("clientList") != null) {
+                     //get the table
+                var table = document.getElementById("clientList");
+                var rows = table.getElementsByTagName('tr');
+                var name = '';
+                var pass = '';
+                var pin = '';
+                    //for method to get all the data from the table row
+                for (var i = 1; i < rows.length; i++) {
+                    rows[i].i = i;
+                    rows[i].onclick = function () {
+                        //get the data from the first, third and fourth cell in the row that was clicked on
+                        name = table.rows[this.i].cells[0].innerHTML;
+                        pass = table.rows[this.i].cells[1].innerHTML;
+                        pin = table.rows[this.i].cells[2].innerHTML;
+                        //display the data in the decrypt div 
+                        document.getElementById("newCientID").value = name;
+						document.getElementById("voucherId").innerHTML = createVoucherID();
+                        
+                    };
+                }
+            }
+			
+			}
+			
+			//function to create expiryDate which is current date plus one year
+			function createExpiryDate(){
+				var d = new Date();
+				var year = d.getFullYear();
+				var month = d.getMonth();
+				var day = d.getDate();
+				return new Date(year + 1, month, day).toISOString();
+			}
+			
+			//function to create bew voucher, POST
+			function post(){
+				
+				var req = new XMLHttpRequest();
+				//get voucher inputs
+				var vID = document.getElementById("voucherId").value;
+				var voucherAmount = document.getElementById("voucherAmount").value;
+				//voucher url
+				var url = "http://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher";
+				req.open("POST", url, true);
+				//set content type and auth headers
+				req.setRequestHeader("Content-Type", "application/json");
+				req.setRequestHeader("Authorization", authentication(credentials));
+				
+				//create voucher object and stringify inputs and other data 
+				var inputs = JSON.stringify({
+					clientId: document.getElementById("newCientID").value, 
+				   creatingBranchId: 'SE-J0emUgQnya14mOGdQSw', 
+				   expiryDate: createExpiryDate(),
+				   issueDate: new Date().toISOString(), 
+				   links: [  
+					 {  
+					   href: 'string', 
+					   rel: 'string', 
+					   templated: true 
+					 } 
+				   ], 
+				   originalBalance: voucherAmount, 
+				   remainingBalance: voucherAmount, 
+				   serialNumber: vID, 
+				   voucherId: vID 
+				});
+				
+				//handle all errors and success responses 
+				//and output reponse to page.
+				req.onload = function() { 
+					if (req.readyState == 4 && req.status == 201){
+						console.log(req.responseText);
+						document.getElementById("postSuccess").innerHTML = "New Voucher Created " + vID;
+						document.getElementById("originalBalance").value = "";
+						document.getElementById("newCientID").value = "";
+						document.getElementById("voucherId").value = "";
+					}
+					else if(req.readyState == 4 && req.status == 401){
+						respData = JSON.parse(req.responseText);
+						document.getElementById("postError").innerHTML = "ERROR- " + respData["error"] + ": " + respData["message"];
+					}
+					else if(req.readyState == 4 && req.status == 403){
+						respData = JSON.parse(req.responseText);
+						document.getElementById("postError").innerHTML = "ERROR- " + respData["error"] + ": " + respData["message"];
+					}
+					else if(req.readyState == 4 && req.status == 404){
+						respData = JSON.parse(req.responseText);
+						document.getElementById("postError").innerHTML = "ERROR- " + respData["error"] + ": " + respData["message"];
+					}
+					else if(req.readyState == 4 && req.status == 412){
+						respData = JSON.parse(req.responseText);
+						document.getElementById("postError").innerHTML = "ERROR- " + respData["error"] + ": " + respData["message"];
+					}
+				}
+				
+				//send
+				req.send(inputs);
+			}
+			
+			//creates random voucher ID to 22 length, so each voucher ID is unique
+			function createVoucherID(){
+				var text = "";
+				var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+				for (var i = 0; i < 22; i++)
+					text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+				document.getElementById("voucherId").value = text;
+			}
+			
+			//window.onload = createVoucherID();
+			
+		  </script>
+		  
+		  
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="../bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    </body>
+</html>
