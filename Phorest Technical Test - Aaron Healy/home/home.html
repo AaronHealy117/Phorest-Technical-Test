@@ -252,29 +252,29 @@
 			
 			//function to allow user to click on table to data to create voucher fields
 			function getRow() {
-            //checks that the table isnt empty
-                if (document.getElementById("clientList") != null) {
-                     //get the table
-                var table = document.getElementById("clientList");
-                var rows = table.getElementsByTagName('tr');
-                var name = '';
-                var pass = '';
-                var pin = '';
-                    //for method to get all the data from the table row
-                for (var i = 1; i < rows.length; i++) {
-                    rows[i].i = i;
-                    rows[i].onclick = function () {
-                        //get the data from the first, third and fourth cell in the row that was clicked on
-                        name = table.rows[this.i].cells[0].innerHTML;
-                        pass = table.rows[this.i].cells[1].innerHTML;
-                        pin = table.rows[this.i].cells[2].innerHTML;
-                        //display the data in the decrypt div 
-                        document.getElementById("newCientID").value = name;
-						document.getElementById("voucherId").innerHTML = createVoucherID();
-                        
-                    };
-                }
-            }
+			    //checks that the table isnt empty
+				if (document.getElementById("clientList") != null) {
+				     //get the table
+				var table = document.getElementById("clientList");
+				var rows = table.getElementsByTagName('tr');
+				var id = '';
+				var name = '';
+				var email = '';
+				    //for method to get all the data from the table row
+				for (var i = 1; i < rows.length; i++) {
+				    rows[i].i = i;
+				    rows[i].onclick = function () {
+					//get the data from the first, third and fourth cell in the row that was clicked on
+					id = table.rows[this.i].cells[0].innerHTML;
+					name = table.rows[this.i].cells[1].innerHTML;
+					email = table.rows[this.i].cells[2].innerHTML;
+					//display the data in the decrypt div 
+					document.getElementById("newCientID").value = id;
+					document.getElementById("voucherId").innerHTML = createVoucherID();
+
+				    };
+				}
+			    }
 			
 			}
 			
