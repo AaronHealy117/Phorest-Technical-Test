@@ -189,7 +189,7 @@
 				req.open("GET", url, true);
 				req.setRequestHeader("Authorization", authentication(credentials));
 				req.send();
-				//if success parse the JSON
+				//if response, handle response, parse the JSON
 				req.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 					   callback.apply(this,[JSON.parse(this.responseText)]);
